@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Mobil</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container text-center">
+    <div>
+        <h1>Data Mobil</h1>
+    </div>
+    <h3>
+        <a th:href="@{'/new/'}">Tambah Mobil</a>
+    </h3>
+    <div>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>NO</th>
+                <th>MODEL</th>
+                <th>MEREK</th>
+                <th>TAHUN</th>
+                <th>WARNA</th>
+                <th>BAN</th>
+                <th>HARGA</th>
+                <th>AKSI</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="data,no:${porcheList}">
+                <tr>
+                    <td>[[${no.count}]]</td>
+                    <td>[[${data.model}]]</td>
+                    <td>[[${data.merekMobil.nama}]]</td>
+                    <td>[[${data.TahunBuat}]]</td>
+                    <td>[[${data.warna}]]</td>
+                    <td>[[${data.roda.nama}]]</td>
+                    <td th:inline="text">$ [[${#numbers.formatDecimal(data.harga, 0, 'COMMA', 2, 'POINT')}]]</td>
+                    <td>
+                        <a th:href="@{'/edit/'+${data.id}}">Ubah</a>
+                        <a th:href="@{'/hapus/'+${data.id}}">Hapus</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
